@@ -77,5 +77,5 @@ const createDataPhoto = () => ({
   comments: Array.from({length:`${getRandomPositiveInteger(MIN_COMMENTS, MAX_COMMENTS)}`},createDataComments)
 });
 
-const photosData = Array.from({length: MAX_PHOTOS}, createDataPhoto);
+const photosData = () => Array.from({length: MAX_PHOTOS}, createDataPhoto);
 photosData(MAX_PHOTOS);
