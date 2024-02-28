@@ -78,3 +78,4 @@ const createDataPhoto = () => ({
 });
 
 const photosData = Array.from({length: MAX_PHOTOS}, createDataPhoto);
+photosData(MAX_PHOTOS);
