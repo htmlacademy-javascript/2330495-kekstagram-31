@@ -1,34 +1,15 @@
-//Функция для проверки длины строки
-const setLength = (str, maxLength) => str.length <= maxLength;
-setLength('проверяемая строка', 20);
+const setTimeinMinutes = (str)=>{
 
-//Функция для проверки, является ли строка палиндромом
-const setPalindrom = (str) => {
-  if(!str?.trim().length) {
-    return false;
-  }
-  const normalizedString = str.replaceAll(' ', '').toUpperCase();
-  let reverseString = ('');
-  for (let i = (normalizedString.length - 1); i >= 0; i--) {
-    reverseString = reverseString + normalizedString[i];
-  }
-  return normalizedString === reverseString;
+  const timeInNumber = str.split(':').map(Number);
+  return (timeInNumber[0] * 60 + timeInNumber[1]);
 };
-setPalindrom('топот');
+const checkTimeMeeting = (workingDayStart,workingDayEnd,timeMeetingStart,durationMeeting) => {
 
-//Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа.
-const setNumbers = (str) => {
-  if (typeof str === 'number'){
-    return str;
-  }
-
-  let result = '';
-  for (let i = 0; i < str.length; i++) {
-    if (!Number.isNaN(parseInt(str.at(i), 10))) {
-      result += str.at(i);
-    }
-  }
-  return parseInt(result,10);
+  if ((setTimeinMinutes(timeMeetingStart) + durationMeeting) <= setTimeinMinutes(workingDayEnd)
+&& setTimeinMinutes(timeMeetingStart) >= setTimeinMinutes(workingDayStart)){
+    return true;
+  } return false;
 };
-setNumbers('2023 год');
+
+checkTimeMeeting('8:00', '17:30', '08:00', 900);
 
