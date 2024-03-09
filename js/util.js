@@ -12,3 +12,14 @@ const getRandomArrayElement = (elements) =>
   elements[getRandomPositiveInteger (0, elements.length - 1)];
 
 export {getRandomPositiveInteger,getRandomArrayElement};
+
+// Находит template в разметке
+const findTemplate = (id) =>{
+  const template = document.querySelector(id);
+  if(!template){
+    return ('Template not found');
+  }
+  return template.content.firstElementChild;
+};
+
+export{findTemplate};
