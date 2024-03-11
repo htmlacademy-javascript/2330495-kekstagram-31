@@ -1,10 +1,4 @@
-import {photosData} from './data.js';
-import {findTemplate} from './util.js';
-
-// Находит контейнер,куда помещаются все фото
-const container = document.querySelector('.pictures');
-
-const photos = photosData();
+import {findTemplate} from './utils.js';
 
 const createThumbnail = (photo)=>{
   const thumbnail = findTemplate('#picture').cloneNode(true);
@@ -19,13 +13,6 @@ const createThumbnail = (photo)=>{
   return thumbnail;
 };
 
-const fragment = document.createDocumentFragment();
+export {createThumbnail};
 
-const renderThumbnail = (photo) =>{
-  const thumbnail = createThumbnail(photo);
-  fragment.append(thumbnail);
-};
-
-photos.forEach(renderThumbnail);
-container.append(fragment);
 
