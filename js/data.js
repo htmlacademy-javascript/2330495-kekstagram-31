@@ -1,24 +1,11 @@
 import {getRandomPositiveInteger,getRandomArrayElement} from './util.js';
 import {DESCRIPTIONS,MAX_AVATARS,MAX_COMMENTS,MAX_LIKES,MAX_PHOTOS,MESSAGES,MIN_COMMENTS,MIN_LIKES,MIN_VALUE,NAMES} from './const.js';
 
-let indentifier;
-const ID = [];
-
-// Проверяет на уникальность ID фото
+let indentifier = 0;
 const getIndentifier = () => {
-
-  if(ID.length > MAX_PHOTOS){
-    return 'Фотографии кончились';
-  }
-  indentifier = getRandomPositiveInteger(MIN_VALUE, MAX_PHOTOS);
-
-  while (ID.includes(indentifier)){
-    indentifier = getRandomPositiveInteger(MIN_VALUE, MAX_PHOTOS);
-  }
-  ID.push(indentifier);
+  indentifier++;
   return indentifier;
 };
-
 
 // Создает обьект комментариев
 const createDataComments = () => ({
@@ -40,3 +27,4 @@ const createDataPhoto = () => ({
 const photosData = () => Array.from({length: MAX_PHOTOS}, createDataPhoto);
 
 export {photosData};
+
