@@ -13,7 +13,6 @@ const createThumbnail = (photo)=>{
   return thumbnail;
 };
 
-
 export {createThumbnail};
 
 
