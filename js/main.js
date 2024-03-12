@@ -8,4 +8,5 @@ const photos = photosData(MAX_PHOTOS);
 
 // Находит контейнер для фото и выводит все фото на экран
 const photosBox = document.querySelector('.pictures');
-renderPack (photos,createThumbnail,photosBox);
+
+renderPack (photos, createThumbnail, photosBox);
