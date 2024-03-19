@@ -1,12 +1,12 @@
 import {photosData} from './data.js';
 import {MAX_PHOTOS} from './const.js';
 import {createThumbnail} from './thumbnails.js';
-import {renderPack} from './utils.js';
+import {renderListNode} from './utils.js';
+import {photosBox} from './open-close-bigphoto';
 
 // Генерит случайные фотографии
 const photos = photosData(MAX_PHOTOS);
 
-// Находит контейнер для фото и выводит все фото на экран
-const photosBox = document.querySelector('.pictures');
+// Выводит все фото случайного пользователя на экран
+renderListNode({dataItems:photos, createdNote:createThumbnail,container:photosBox});
 
-renderPack (photos, createThumbnail, photosBox);

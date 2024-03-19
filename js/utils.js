@@ -1,4 +1,4 @@
-// Выводит случайное число
+//Генерит случайное число
 const getRandomPositiveInteger = (a,b) => {
   const lower = Math.ceil(Math.min(a,b));
   const upper = Math.floor(Math.max(a,b));
@@ -6,12 +6,9 @@ const getRandomPositiveInteger = (a,b) => {
   return Math.floor(result);
 };
 
-
 // Выводит элемент с индексом случайного числа
 const getRandomArrayElement = (elements) =>
   elements[getRandomPositiveInteger (0, elements.length - 1)];
-
-export {getRandomPositiveInteger,getRandomArrayElement};
 
 // Находит template в разметке
 const findTemplate = (id) =>{
@@ -27,11 +24,15 @@ const findTemplate = (id) =>{
 };
 
 // Создает функцию добавления фрагмента в контейнер
-const renderPack = (items,makeElement,container) =>{
+const renderListNode = ({dataItems,createdNote,container}) =>{
   const fragment = document.createDocumentFragment();
-  items.forEach((item) => fragment.append(makeElement(item)));
+  dataItems.forEach((item) => fragment.append(createdNote(item)));
   container.append(fragment);
 };
 
-export{findTemplate,renderPack};
+// Cоздает функцию проверки нажатой клавиши
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomPositiveInteger,getRandomArrayElement};
+export {findTemplate,renderListNode,isEscapeKey};
 
