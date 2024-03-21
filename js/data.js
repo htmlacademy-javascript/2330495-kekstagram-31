@@ -26,6 +26,7 @@ const createDataPhoto = () => ({
 });
 
 const photosData = () => Array.from({length: MAX_PHOTOS}, createDataPhoto);
+const picturesData = photosData(MAX_PHOTOS);
 
-export {photosData};
+export {picturesData};
 

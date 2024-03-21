@@ -1,6 +1,6 @@
 import {findTemplate} from './utils.js';
 
-const createThumbnail = ({url,description,comments,likes})=>{
+const createThumbnail = ({url, description, comments, likes, id})=>{
   const thumbnail = findTemplate('#picture').cloneNode(true);
   const image = thumbnail.querySelector('.picture__img');
 
@@ -9,6 +9,8 @@ const createThumbnail = ({url,description,comments,likes})=>{
 
   thumbnail.querySelector('.picture__comments').textContent = comments.length;
   thumbnail.querySelector('.picture__likes').textContent = likes;
+
+  thumbnail.dataset.photoId = id;
 
   return thumbnail;
 };
