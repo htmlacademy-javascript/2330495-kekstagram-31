@@ -1,6 +1,7 @@
-import {getRandomPositiveInteger,getRandomArrayElement} from './util.js';
+import {getRandomPositiveInteger,getRandomArrayElement} from './utils.js';
 import {DESCRIPTIONS,MAX_AVATARS,MAX_COMMENTS,MAX_LIKES,MAX_PHOTOS,MESSAGES,MIN_COMMENTS,MIN_LIKES,MIN_VALUE,NAMES} from './const.js';
 
+// Создает ID для фото
 let indentifier = 0;
 const getIndentifier = () => {
   indentifier++;
@@ -25,6 +26,7 @@ const createDataPhoto = () => ({
 });
 
 const photosData = () => Array.from({length: MAX_PHOTOS}, createDataPhoto);
+const picturesData = photosData(MAX_PHOTOS);
 
-export {photosData};
+export {picturesData};
 
