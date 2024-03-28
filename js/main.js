@@ -1,7 +1,9 @@
 import {picturesData} from './data.js';
 import {createThumbnail} from './thumbnails.js';
 import {renderListNode} from './utils.js';
-import {openBigPhoto} from './photo handlers.js';
+import {renderCurrentPhoto} from './big-photo.js';
+import './open-close-modal.js';
+
 
 const thumbnailsBox = document.querySelector('.pictures');
 
@@ -9,4 +11,4 @@ const thumbnailsBox = document.querySelector('.pictures');
 renderListNode({dataItems:picturesData, createdNote:createThumbnail, container:thumbnailsBox});
 
 // Обработчик который открывает большую фотографию
-thumbnailsBox.addEventListener('click', openBigPhoto);
+thumbnailsBox.addEventListener('click', renderCurrentPhoto);
