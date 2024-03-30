@@ -2,7 +2,7 @@ import {picturesData} from './data.js';
 import {createThumbnail} from './thumbnails.js';
 import {renderListNode} from './utils.js';
 import {renderCurrentPhoto} from './big-photo.js';
-import './open-close-modal.js';
+import './upload-photo-form.js';
 
 
 const thumbnailsBox = document.querySelector('.pictures');
