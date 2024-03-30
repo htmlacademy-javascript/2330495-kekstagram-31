@@ -12,4 +12,5 @@ const createComments = ({avatar, message, user})=>{
   return socialComment;
 };
 
+
 export {createComments};
