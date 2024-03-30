@@ -60,8 +60,6 @@ pristine.addValidator(hashtagInput,(value)=>{
   return hashtag;
 },'Ошибка здесь');
 
-
-
 // uploadForm.addEventListener ('submit',(evt)=>{
 
 //   const isValid = pristine.validate();
