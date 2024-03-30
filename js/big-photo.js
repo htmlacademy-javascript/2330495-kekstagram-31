@@ -1,6 +1,6 @@
 import {isEscapeKey} from './utils.js';
 import {renderListNode} from './utils.js';
-import { openModal,closeModal } from './open-close-modal.js';
+import {openModal,closeModal} from './open-close-modal.js';
 import {createComments} from './comments.js';
 import {picturesData} from './data.js';
 
@@ -15,7 +15,7 @@ const commentsTotalCount = document.querySelector('.social__comment-total-count'
 const commentsShowCount = document.querySelector('.social__comment-shown-count');
 const commentsLoader = document.querySelector('.comments-loader');
 
-let currentCount = 0;
+let currentCount;
 const COMMENTS_STEP = 5;
 
 const renderBigPhoto = (photoNode)=>{
@@ -32,19 +32,24 @@ const renderBigPhoto = (photoNode)=>{
 
 
 const renderNextComments = (dataComments)=>{
-  const renderedComments = dataComments.slice(currentCount, currentCount + COMMENTS_STEP);
+  const step = currentCount + COMMENTS_STEP;
+  const renderedComments = dataComments.slice(currentCount, step);
   const renderedCommentsLength = renderedComments.length + currentCount;
 
   if (renderedCommentsLength >= dataComments.length){
     commentsShowCount.textContent = dataComments.length;
     commentsLoader.classList.add('hidden');
     renderListNode ({dataItems:renderedComments,createdNote:createComments,container:commentsContainer});
+    // currentCount= 0;
   } else {
     commentsLoader.classList.remove('hidden');
     renderListNode ({dataItems:renderedComments,createdNote:createComments,container:commentsContainer});
-    currentCount += COMMENTS_STEP;
-    commentsShowCount.textContent = currentCount ;
+
+    commentsShowCount.textContent = step ;
+
+
   }
+  currentCount += COMMENTS_STEP;
 };
 
 // Функция рендера комментов
@@ -52,7 +57,9 @@ function renderComments (currentComments){
   renderNextComments(currentComments);
 
   commentsLoader.addEventListener('click',()=>{
+
     renderNextComments(currentComments);
+
   });
 }
 
@@ -64,7 +71,7 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-const openBigPhoto = () => openModal(bigPhotoContainer);
+const openBigPhoto = () => openModal(bigPhotoContainer,onDocumentKeydown);
 
 //Функция открытия большого фото
 const renderCurrentPhoto = (evt)=> {
@@ -72,6 +79,7 @@ const renderCurrentPhoto = (evt)=> {
 
   if(currentPhotoNode){
     evt.preventDefault();
+    currentCount = 0;
     commentsContainer.textContent = '';
     renderBigPhoto(currentPhotoNode);
     openBigPhoto();
@@ -80,8 +88,8 @@ const renderCurrentPhoto = (evt)=> {
 
 //Функция закрытия большого фото
 function closeBigPhoto () {
-  currentCount = 0;
-  closeModal(bigPhotoContainer);
+  // currentCount = 0;
+  closeModal(bigPhotoContainer,onDocumentKeydown);
 }
 
 // Обработчик, который закрывает большую фотографию
