@@ -1,6 +1,7 @@
 import {isEscapeKey} from './utils';
 import {openModal,closeModal} from './open-close-modal';
 
+
 // Форма выбора файла с изображением для загрузки;
 const uploadForm = document.querySelector('.img-upload__form');
 const pageBody = document.querySelector('body');

@@ -17,6 +17,7 @@ const commentsLoader = document.querySelector('.comments-loader');
 
 let currentCount;
 const COMMENTS_STEP = 5;
+let commentsData = [];
 
 const renderBigPhoto = (photoNode)=>{
   const currentPhoto = picturesData.find((photo) => photo.id === Number(photoNode.dataset.photoId));
@@ -27,40 +28,27 @@ const renderBigPhoto = (photoNode)=>{
   bigPhotoDiscription.textContent = currentPhoto.description;
   commentsTotalCount.textContent = currentPhoto.comments.length;
 
-  renderComments(currentPhoto.comments);
+  commentsData = currentPhoto.comments;
+  renderNextComments();
+  commentsLoader.addEventListener('click', renderNextComments);
 };
 
 
-const renderNextComments = (dataComments)=>{
+function renderNextComments (){
   const step = currentCount + COMMENTS_STEP;
-  const renderedComments = dataComments.slice(currentCount, step);
+  const renderedComments = commentsData.slice(currentCount, step);
   const renderedCommentsLength = renderedComments.length + currentCount;
 
-  if (renderedCommentsLength >= dataComments.length){
-    commentsShowCount.textContent = dataComments.length;
+  if (renderedCommentsLength >= commentsData.length){
+    commentsShowCount.textContent = commentsData.length;
     commentsLoader.classList.add('hidden');
     renderListNode ({dataItems:renderedComments,createdNote:createComments,container:commentsContainer});
-    // currentCount= 0;
   } else {
     commentsLoader.classList.remove('hidden');
     renderListNode ({dataItems:renderedComments,createdNote:createComments,container:commentsContainer});
-
     commentsShowCount.textContent = step ;
-
-
   }
   currentCount += COMMENTS_STEP;
-};
-
-// Функция рендера комментов
-function renderComments (currentComments){
-  renderNextComments(currentComments);
-
-  commentsLoader.addEventListener('click',()=>{
-
-    renderNextComments(currentComments);
-
-  });
 }
 
 //Функция закрытия большого фото по Escape
@@ -88,8 +76,8 @@ const renderCurrentPhoto = (evt)=> {
 
 //Функция закрытия большого фото
 function closeBigPhoto () {
-  // currentCount = 0;
   closeModal(bigPhotoContainer,onDocumentKeydown);
+  commentsLoader.removeEventListener('click', renderNextComments);
 }
 
 // Обработчик, который закрывает большую фотографию
