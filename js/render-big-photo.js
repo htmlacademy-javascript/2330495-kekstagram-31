@@ -1,23 +1,16 @@
 import {isEscapeKey} from './utils.js';
-import {renderListNode} from './utils.js';
 import {openModal,closeModal} from './open-close-modal.js';
-import {createComments} from './comments.js';
-import {picturesData} from './data.js';
+import {renderNextComments, commentsLoader, cleanComments} from './render-comments.js';
+import {picturesData} from './main.js';
 
 const bigPhotoContainer = document.querySelector('.big-picture');
 const bigPhotoCloseElement = bigPhotoContainer.querySelector('.big-picture__cancel');
 const bigPhotoImage = document.querySelector('.big-picture__img img');
 const likesCount = document.querySelector('.likes-count');
 const bigPhotoDiscription = document.querySelector('.social__caption');
-
-const commentsContainer = document.querySelector('.social__comments');
 const commentsTotalCount = document.querySelector('.social__comment-total-count');
-const commentsShowCount = document.querySelector('.social__comment-shown-count');
-const commentsLoader = document.querySelector('.comments-loader');
-
-let currentCount;
-const COMMENTS_STEP = 5;
 let commentsData = [];
+
 
 const renderBigPhoto = (photoNode)=>{
   const currentPhoto = picturesData.find((photo) => photo.id === Number(photoNode.dataset.photoId));
@@ -34,24 +27,6 @@ const renderBigPhoto = (photoNode)=>{
 };
 
 
-function renderNextComments (){
-  const step = currentCount + COMMENTS_STEP;
-  const renderedComments = commentsData.slice(currentCount, step);
-  const renderedCommentsLength = renderedComments.length + currentCount;
-
-  if (renderedCommentsLength >= commentsData.length){
-    commentsShowCount.textContent = commentsData.length;
-    commentsLoader.classList.add('hidden');
-    renderListNode ({dataItems:renderedComments,createdNote:createComments,container:commentsContainer});
-  } else {
-    commentsLoader.classList.remove('hidden');
-    renderListNode ({dataItems:renderedComments,createdNote:createComments,container:commentsContainer});
-    commentsShowCount.textContent = step ;
-  }
-  currentCount += COMMENTS_STEP;
-}
-
-//Функция закрытия большого фото по Escape
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -67,8 +42,7 @@ const renderCurrentPhoto = (evt)=> {
 
   if(currentPhotoNode){
     evt.preventDefault();
-    currentCount = 0;
-    commentsContainer.textContent = '';
+    cleanComments();
     renderBigPhoto(currentPhotoNode);
     openBigPhoto();
   }
@@ -83,4 +57,4 @@ function closeBigPhoto () {
 // Обработчик, который закрывает большую фотографию
 bigPhotoCloseElement.addEventListener('click',closeBigPhoto);
 
-export{renderCurrentPhoto, onDocumentKeydown};
+export{renderCurrentPhoto, commentsData};

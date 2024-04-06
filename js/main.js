@@ -1,27 +1,33 @@
-import {picturesData} from './data.js';
+
 import {createThumbnail} from './thumbnails.js';
 import {renderListNode} from './utils.js';
-import {renderCurrentPhoto} from './big-photo.js';
-import './upload-photo-form.js';
-import {onSmallerClick,onBiggerClick} from './scale-photo-editor.js';
-
+import {renderCurrentPhoto} from './render-big-photo.js';
+import './validation-form.js';
+import {smallScaleButton,bigScaleButton,onSmallBtnClick,onBigBtnClick} from './scale-photo-editor.js';
 import {onEffectChange} from './effect-photo-editor.js';
-
+import {getData} from './api.js';
+import {imgUploadInput,handleFileInputChange} from'./upload-form.js';
+import {showErrorMessage} from './data-error.js';
 
 const thumbnailsBox = document.querySelector('.pictures');
 const effectsList = document.querySelector('.effects__list');
-const imgUploadContainer = document.querySelector('.img-upload__preview-container');
-const smallScaleButton = imgUploadContainer.querySelector('.scale__control--smaller');
-const bigScaleButton = imgUploadContainer.querySelector('.scale__control--bigger');
+let picturesData;
 
-
-// Выводит все фото случайных пользователей на экран с помощью шаблона
-renderListNode({dataItems:picturesData, createdNote:createThumbnail, container:thumbnailsBox});
+getData.then ((data)=>{
+  picturesData = data;
+  renderListNode({dataItems:picturesData, createdNote:createThumbnail, container:thumbnailsBox});
+}).catch ((error) => {
+  showErrorMessage(error.message);
+});
 
 // Обработчик который открывает большую фотографию
 thumbnailsBox.addEventListener('click', renderCurrentPhoto);
 
 effectsList.addEventListener ('change',onEffectChange);
 
-smallScaleButton.addEventListener('click',onSmallerClick);
-bigScaleButton.addEventListener('click',onBiggerClick);
+smallScaleButton.addEventListener('click', onSmallBtnClick);
+bigScaleButton.addEventListener('click', onBigBtnClick);
+
+imgUploadInput.addEventListener('change', handleFileInputChange);
+
+export {picturesData};

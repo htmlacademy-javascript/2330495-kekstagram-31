@@ -1,9 +1,9 @@
-const imgUploadComtainer = document.querySelector('.img-upload__wrapper');
-const effectLevelValue = imgUploadComtainer.querySelector('.effect-level__value');
-const effectLevel = imgUploadComtainer.querySelector('.img-upload__effect-level');
-const slider = imgUploadComtainer.querySelector('.effect-level__slider');
-const img = imgUploadComtainer.querySelector('.img-upload__preview');
+import {previewImage} from './upload-form';
+import {imgUploadOverlay} from './upload-form';
 
+const effectLevelValue = imgUploadOverlay.querySelector('.effect-level__value');
+const effectLevel = imgUploadOverlay.querySelector('.img-upload__effect-level');
+const slider = imgUploadOverlay.querySelector('.effect-level__slider');
 
 noUiSlider.create(slider, {
   start: 0,
@@ -37,7 +37,7 @@ const onEffectChange = (evt) => {
 
   switch (effect){
     case 'none':
-      img.style.filter = 'none';
+      previewImage.style.filter = 'none';
       break;
     case 'chrome':
       slider.noUiSlider.updateOptions({
@@ -46,11 +46,11 @@ const onEffectChange = (evt) => {
           max: 1,
         },
         // с чего начинать и какой шаг
-        start: 1,
+        start: 100,
         step: 0.1,
       });
       slider.noUiSlider.on('update', () =>{
-        img.style.filter = `grayscale(${effectLevelValue.value})`;
+        previewImage.style.filter = `grayscale(${effectLevelValue.value})`;
       });
       break;
     case 'sepia':
@@ -59,11 +59,11 @@ const onEffectChange = (evt) => {
           min: 0,
           max: 1,
         },
-        start: 1,
+        start: 100,
         step: 0.1,
       });
       slider.noUiSlider.on('update', () =>{
-        img.style.filter = `sepia(${effectLevelValue.value})`;
+        previewImage.style.filter = `sepia(${effectLevelValue.value})`;
       });
       break;
     case 'marvin':
@@ -76,7 +76,7 @@ const onEffectChange = (evt) => {
         step: 1,
       });
       slider.noUiSlider.on('update', () =>{
-        img.style.filter = `invert(${effectLevelValue.value}%)`;
+        previewImage.style.filter = `invert(${effectLevelValue.value}%)`;
       });
       break;
     case 'phobos':
@@ -89,7 +89,7 @@ const onEffectChange = (evt) => {
         step: 0.1,
       });
       slider.noUiSlider.on('update', () =>{
-        img.style.filter = `blur(${effectLevelValue.value}px)`;
+        previewImage.style.filter = `blur(${effectLevelValue.value}px)`;
       });
       break;
     case 'heat':
@@ -102,7 +102,7 @@ const onEffectChange = (evt) => {
         step: 0.1,
       });
       slider.noUiSlider.on('update', () =>{
-        img.style.filter = `brightness(${effectLevelValue.value})`;
+        previewImage.style.filter = `brightness(${effectLevelValue.value})`;
       });
   }
 };
