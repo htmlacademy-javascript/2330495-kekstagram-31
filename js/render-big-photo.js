@@ -2,13 +2,14 @@ import {isEscapeKey} from './utils.js';
 import {openModal,closeModal} from './open-close-modal.js';
 import {renderNextComments, commentsLoader, cleanComments} from './render-comments.js';
 import {picturesData} from './main.js';
+import {bigPhotoContainer} from './const';
 
-const bigPhotoContainer = document.querySelector('.big-picture');
+// const bigPhotoContainer = document.querySelector('.big-picture');
 const bigPhotoCloseElement = bigPhotoContainer.querySelector('.big-picture__cancel');
-const bigPhotoImage = document.querySelector('.big-picture__img img');
-const likesCount = document.querySelector('.likes-count');
-const bigPhotoDiscription = document.querySelector('.social__caption');
-const commentsTotalCount = document.querySelector('.social__comment-total-count');
+const bigPhotoImage = bigPhotoContainer.querySelector('.big-picture__img img');
+const likesCount = bigPhotoContainer.querySelector('.likes-count');
+const bigPhotoDiscription = bigPhotoContainer.querySelector('.social__caption');
+// const commentsTotalCount = bigPhotoContainer.querySelector('.social__comment-total-count');
 let commentsData = [];
 
 
@@ -19,7 +20,7 @@ const renderBigPhoto = (photoNode)=>{
   bigPhotoImage.alt = currentPhoto.description;
   likesCount.textContent = currentPhoto.likes;
   bigPhotoDiscription.textContent = currentPhoto.description;
-  commentsTotalCount.textContent = currentPhoto.comments.length;
+  // commentsTotalCount.textContent = currentPhoto.comments.length;
 
   commentsData = currentPhoto.comments;
   renderNextComments();

@@ -1,10 +1,11 @@
 import {findTemplate, renderListNode} from './utils.js';
 import {commentsData} from './render-big-photo.js';
-import {COMMENTS_STEP} from './const.js';
+import {COMMENTS_STEP,bigPhotoContainer} from './const.js';
 
-const commentsShowCount = document.querySelector('.social__comment-shown-count');
-const commentsContainer = document.querySelector('.social__comments');
-const commentsLoader = document.querySelector('.comments-loader');
+const commentsShowCount = bigPhotoContainer.querySelector('.social__comment-shown-count');
+const commentsTotalCount = bigPhotoContainer.querySelector('.social__comment-total-count');
+const commentsContainer = bigPhotoContainer.querySelector('.social__comments');
+const commentsLoader = bigPhotoContainer.querySelector('.comments-loader');
 let currentCount;
 
 
@@ -22,6 +23,7 @@ const createComments = ({avatar, message, user})=>{
 
 const renderNextComments = () => {
   const step = currentCount + COMMENTS_STEP;
+
   const renderedComments = commentsData.slice(currentCount, step);
   const renderedCommentsLength = renderedComments.length + currentCount;
 
@@ -35,6 +37,7 @@ const renderNextComments = () => {
     commentsShowCount.textContent = step ;
   }
   currentCount += COMMENTS_STEP;
+  commentsTotalCount.textContent = commentsData.length;
 };
 
 const cleanComments = () =>{

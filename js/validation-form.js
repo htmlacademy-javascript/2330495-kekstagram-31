@@ -1,8 +1,7 @@
 import {sendData} from './api';
+import {imgUploadForm, hashtagsInput, commentsInput} from './const.js';
+import { clearFilter } from './effect-photo-editor.js';
 
-const imgUploadForm = document.querySelector('.img-upload__form');
-const hashtagsInput = imgUploadForm.querySelector('.text__hashtags');
-const commentsInput = imgUploadForm.querySelector('.text__description');
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper', // Элемент, на который будут добавляться классы
@@ -47,11 +46,14 @@ pristine.addValidator(commentsInput, commenstValidator, message);
 
 const formSubmitButton = document.querySelector('#upload-submit');
 
-const formReset = () => imgUploadForm.reset();
+const formReset = () => {
+  imgUploadForm.reset();
+  clearFilter();
+};
 
 const SubmitButtonText = {
-  IDLE:'Сохранить',
-  SENDING:'Сохранение...',
+  IDLE:'Опубликовано',
+  SENDING:'Публикую...',
 };
 
 const disabledButton = (text) => {
@@ -72,8 +74,6 @@ const sendFormData = (formElement) => {
     sendData (new FormData(formElement));
     enabledButton(SubmitButtonText.IDLE);
     formReset();
-  // }else{
-  //   console.log('Форма не валидна!');
   }
 };
 
@@ -85,4 +85,4 @@ const formSubmitHadler = (evt) =>{
 imgUploadForm.addEventListener('submit',
   formSubmitHadler);
 
-export {imgUploadForm, hashtagsInput,commentsInput, formReset};
+export {formReset};
