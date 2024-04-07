@@ -1,28 +1,29 @@
 import {SCALE_STEP} from './const';
+import {previewImage} from './upload-form';
+import {imgUploadOverlay} from './const.js';
 
-const imgUploadComtainer = document.querySelector('.img-upload__preview-container');
-const image = imgUploadComtainer.querySelector('.img-upload__preview img');
-const scaleControl = imgUploadComtainer.querySelector('.scale__control--value');
+const imgUploadContainer = imgUploadOverlay.querySelector('.img-upload__preview-container');
+const scaleControl = imgUploadContainer.querySelector('.scale__control--value');
+const smallScaleButton = imgUploadContainer.querySelector('.scale__control--smaller');
+const bigScaleButton = imgUploadContainer.querySelector('.scale__control--bigger');
+
 
 let scale = 1;
 
-
-const onSmallerClick = () =>{
-  //проверка на то что картинка не станет меньше шага
+const onSmallBtnClick = () =>{
   if (scale > SCALE_STEP){
     scale -= SCALE_STEP;
-    image.style.transform = `scale(${scale})`;
-    //запись в велью получаем проценты
+    previewImage.style.transform = `scale(${scale})`;
     scaleControl.value = `${scale * 100}%`;
   }
 };
 
-const onBiggerClick = () =>{
+const onBigBtnClick = () =>{
   if (scale < 1){
     scale += SCALE_STEP;
-    image.style.transform = `scale(${scale})`;
+    previewImage.style.transform = `scale(${scale})`;
     scaleControl.value = `${scale * 100}%`;
   }
 };
 
-export {onSmallerClick,onBiggerClick};
+export {smallScaleButton,bigScaleButton,onSmallBtnClick,onBigBtnClick};

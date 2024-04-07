@@ -1,5 +1,3 @@
-// import {onDocumentKeydown} from './big-photo'
-// import {onDocumentKeydown} from './upload-photo-form';
 
 const openModal = (container,keydownClick)=>{
   container.classList.remove('hidden');

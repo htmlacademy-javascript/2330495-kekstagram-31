@@ -1,37 +1,13 @@
-const MAX_PHOTOS = 25;
-const MIN_COMMENTS = 0;
-const MAX_COMMENTS = 30;
-const MIN_LIKES = 15;
-const MAX_LIKES = 200;
-const MAX_AVATARS = 6;
-const MIN_VALUE = 1;
+
 const SCALE_STEP = 0.25;
+const COMMENTS_STEP = 5;
+const REMOVE_MESSAGE_TIMEOUT = 5000;
 
-const NAMES = [
-  'Иван',
-  'Хуан Себастьян',
-  'Мария',
-  'Кристоф',
-  'Виктор',
-  'Юлия',
-  'Люпита',
-  'Вашингтон',
-];
-const MESSAGES = [
-  'Всё отлично!В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию,хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
-const DESCRIPTIONS = [
-  'Солнечный закат',
-  'Горячий кофе',
-  'Радужный дождь',
-  'Солнечный день',
-  'Зеленый луг',
-  'Красивый океан',
-  'Волшебный лес'
-];
+const imgUploadForm = document.querySelector('.img-upload__form');
+const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
+const pageBody = document.querySelector('body');
+const bigPhotoContainer = document.querySelector('.big-picture');
+const hashtagsInput = imgUploadForm.querySelector('.text__hashtags');
+const commentsInput = imgUploadForm.querySelector('.text__description');
 
-export{DESCRIPTIONS,MAX_AVATARS,MAX_COMMENTS,MAX_LIKES,MAX_PHOTOS,MESSAGES,MIN_COMMENTS,MIN_LIKES,MIN_VALUE,NAMES,SCALE_STEP};
+export{COMMENTS_STEP , SCALE_STEP, REMOVE_MESSAGE_TIMEOUT ,imgUploadForm, imgUploadOverlay, pageBody, bigPhotoContainer, hashtagsInput, commentsInput};
