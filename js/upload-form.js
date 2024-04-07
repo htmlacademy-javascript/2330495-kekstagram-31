@@ -1,12 +1,12 @@
 
 import {isEscapeKey} from './utils';
 import {openModal,closeModal} from './open-close-modal';
-import {imgUploadForm, hashtagsInput, commentsInput, formReset} from './validation-form';
+import {formReset} from './validation-form';
+import {hashtagsInput, commentsInput, imgUploadForm,imgUploadOverlay,pageBody} from './const.js';
+
 
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
-const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
-const pageBody = document.querySelector('body');
-
+const miniPreviewImages = imgUploadForm.querySelectorAll('.effects__preview');
 const ImgUploadCancelBtn = imgUploadOverlay.querySelector('.img-upload__cancel');
 const previewImage = imgUploadOverlay.querySelector('.img-upload__preview img');
 
@@ -17,8 +17,6 @@ const onPhotoKeydown = (evt) => {
     if(document.activeElement === hashtagsInput || document.activeElement === commentsInput){
       evt.stopPropagation();
     }else {
-      // imgUploadForm.reset();
-      formReset();
       closeFormUpload();
     }
   }
@@ -30,6 +28,9 @@ const readFile = (file) => {
   const reader = new FileReader();
   reader.onload = (evt) => {
     previewImage.src = evt.target.result;
+    miniPreviewImages.forEach ((miniPreviewImage) =>{
+      miniPreviewImage.style.backgroundImage = `url(${evt.target.result})`;
+    });
   };
   reader.readAsDataURL(file);
 };
@@ -47,16 +48,12 @@ const handleFileInputChange = (event) => {
     openFormUpload();
   }
 };
-// не забыть почистить другие инпуты
-const cleanFormInputs = () => {
-  imgUploadInput.value = '';
-};
 
 function closeFormUpload (){
   closeModal(imgUploadOverlay,onPhotoKeydown);
   pageBody.classList.remove('modal-open');
   ImgUploadCancelBtn.removeEventListener('click',onPhotoEditorResetBtnClick);
-  cleanFormInputs();
+  formReset();
 }
 
 export {previewImage,imgUploadInput,handleFileInputChange,imgUploadOverlay};
