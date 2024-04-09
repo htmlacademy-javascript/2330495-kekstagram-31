@@ -1,6 +1,7 @@
 import {sendData} from './api';
-import {imgUploadForm, hashtagsInput, commentsInput} from './const.js';
-import { clearFilter } from './effect-photo-editor.js';
+import {imgUploadForm, hashtagsInput, commentsInput, SubmitButtonText} from './const.js';
+import {formReset, disabledButton, enabledButton, templateSuccess, templateError } from './loading-modul.js';
+import {closeFormUpload } from './upload-form.js';
 
 
 const pristine = new Pristine(imgUploadForm, {
@@ -12,7 +13,7 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'pristine-error' // Класс для элемента с текстом ошибки
 });
 
-const errorMessage = 'Ошибка здесь';
+const errorMessage = 'Хэштег начинается с символа # и должна состоять из букв и чисел ';
 const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 const hashtagsValidator = (value) =>{
@@ -44,45 +45,25 @@ const commenstValidator = () =>{
 pristine.addValidator(hashtagsInput, hashtagsValidator, errorMessage);
 pristine.addValidator(commentsInput, commenstValidator, message);
 
-const formSubmitButton = document.querySelector('#upload-submit');
-
-const formReset = () => {
-  imgUploadForm.reset();
-  clearFilter();
-};
-
-const SubmitButtonText = {
-  IDLE:'Опубликовано',
-  SENDING:'Публикую...',
-};
-
-const disabledButton = (text) => {
-  formSubmitButton.disabled = true;
-  formSubmitButton.textContent = text;
-};
-
-const enabledButton = (text) =>{
-  formSubmitButton.disabled = false;
-  formSubmitButton.textContent = text;
-};
 
 const sendFormData = (formElement) => {
   const isValide = pristine.validate();
 
   if(isValide){
     disabledButton(SubmitButtonText.SENDING);
-    sendData (new FormData(formElement));
+    try {
+      sendData (new FormData(formElement));
+      appendNotification(templateSuccess, () => closeFormUpload());
+
+      formReset();
+  } catch (error){
+    appendNotification(templateError);
+  } finally {
     enabledButton(SubmitButtonText.IDLE);
-    formReset();
+}
   }
 };
 
-const formSubmitHadler = (evt) =>{
-  evt.preventDefault();
-  sendFormData(evt.target);
-};
 
-imgUploadForm.addEventListener('submit',
-  formSubmitHadler);
 
-export {formReset};
+export {sendFormData};

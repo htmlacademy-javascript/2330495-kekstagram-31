@@ -4,12 +4,11 @@ import {renderNextComments, commentsLoader, cleanComments} from './render-commen
 import {picturesData} from './main.js';
 import {bigPhotoContainer} from './const';
 
-// const bigPhotoContainer = document.querySelector('.big-picture');
+
 const bigPhotoCloseElement = bigPhotoContainer.querySelector('.big-picture__cancel');
 const bigPhotoImage = bigPhotoContainer.querySelector('.big-picture__img img');
 const likesCount = bigPhotoContainer.querySelector('.likes-count');
 const bigPhotoDiscription = bigPhotoContainer.querySelector('.social__caption');
-// const commentsTotalCount = bigPhotoContainer.querySelector('.social__comment-total-count');
 let commentsData = [];
 
 
@@ -20,7 +19,6 @@ const renderBigPhoto = (photoNode)=>{
   bigPhotoImage.alt = currentPhoto.description;
   likesCount.textContent = currentPhoto.likes;
   bigPhotoDiscription.textContent = currentPhoto.description;
-  // commentsTotalCount.textContent = currentPhoto.comments.length;
 
   commentsData = currentPhoto.comments;
   renderNextComments();
@@ -58,4 +56,4 @@ function closeBigPhoto () {
 // Обработчик, который закрывает большую фотографию
 bigPhotoCloseElement.addEventListener('click',closeBigPhoto);
 
-export{renderCurrentPhoto, commentsData};
+export{renderCurrentPhoto, renderBigPhoto, commentsData};

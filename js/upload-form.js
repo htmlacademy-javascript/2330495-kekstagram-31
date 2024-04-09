@@ -1,7 +1,7 @@
 
 import {isEscapeKey} from './utils';
 import {openModal,closeModal} from './open-close-modal';
-import {formReset} from './validation-form';
+import {formReset} from './loading-modul.js';
 import {hashtagsInput, commentsInput, imgUploadForm,imgUploadOverlay,pageBody} from './const.js';
 
 
@@ -56,4 +56,4 @@ function closeFormUpload (){
   formReset();
 }
 
-export {previewImage,imgUploadInput,handleFileInputChange,imgUploadOverlay};
+export {previewImage,imgUploadInput,handleFileInputChange,imgUploadOverlay,closeFormUpload };

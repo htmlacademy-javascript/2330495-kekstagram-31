@@ -38,7 +38,6 @@ const updateSliderOptions = ({min, max, start, step, filterName, unit}) =>{
 
 effectLevel.classList.add('hidden');
 
-
 const clearFilter = () => {
   effectLevelValue.value = '';
   effectLevel.classList.add('hidden');
