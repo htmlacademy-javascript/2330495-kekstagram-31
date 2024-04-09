@@ -1,6 +1,6 @@
-import {debounce} from './utils';
+
 import {FILTER,SORTFUNC,MAX_PICTURE_COUNT, ACTIVE_BUTTON_CLASS} from './const.js';
-import {renderCurrentPhoto,renderBigPhoto} from './render-big-photo';
+
 import {renderListNode} from './utils.js';
 import {createThumbnail} from './thumbnails.js';
 import {thumbnailsBox} from './main.js';
@@ -16,16 +16,15 @@ const applyFilter = () => {
   let filteredPictures = [];
   if (currentFilter === FILTER.default){
     filteredPictures = pictures;
-    console.log(filteredPictures);
   }
   if (currentFilter === FILTER.random){
     filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0, MAX_PICTURE_COUNT);
 
-    console.log(filteredPictures);
+
   }
   if (currentFilter === FILTER.discussed){
     filteredPictures = pictures.toSorted(SORTFUNC.discussed);
-    console.log(filteredPictures);
+
 
   }
   // debounceRender(filteredPictures);

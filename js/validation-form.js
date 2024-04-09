@@ -1,8 +1,6 @@
 import {sendData} from './api';
 import {imgUploadForm, hashtagsInput, commentsInput, SubmitButtonText} from './const.js';
-import {formReset, disabledButton, enabledButton, templateSuccess, templateError } from './loading-modul.js';
-import {closeFormUpload } from './upload-form.js';
-
+import {disabledButton } from './loading-modul.js';
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper', // Элемент, на который будут добавляться классы
@@ -51,19 +49,8 @@ const sendFormData = (formElement) => {
 
   if(isValide){
     disabledButton(SubmitButtonText.SENDING);
-    try {
-      sendData (new FormData(formElement));
-      appendNotification(templateSuccess, () => closeFormUpload());
-
-      formReset();
-  } catch (error){
-    appendNotification(templateError);
-  } finally {
-    enabledButton(SubmitButtonText.IDLE);
-}
+    sendData (new FormData(formElement));
   }
 };
-
-
 
 export {sendFormData};

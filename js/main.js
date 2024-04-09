@@ -9,7 +9,6 @@ import {getData} from './api.js';
 import {imgUploadInput,handleFileInputChange} from'./upload-form.js';
 import {showErrorMessage} from './data-error.js';
 import {configFilter} from './filter.js';
-import './notification.js';
 import './loading-modul.js';
 
 const thumbnailsBox = document.querySelector('.pictures');
