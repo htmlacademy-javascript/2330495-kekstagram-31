@@ -1,5 +1,5 @@
 import {SCALE_STEP} from './const';
-import {previewImage} from './upload-form';
+import {previewImage} from './upload-photo-form.js';
 import {imgUploadOverlay} from './const.js';
 
 const imgUploadContainer = imgUploadOverlay.querySelector('.img-upload__preview-container');

@@ -1,7 +1,7 @@
 
-import {isEscapeKey} from './utils';
-import {openModal,closeModal} from './open-close-modal';
-import {formReset} from './loading-modul.js';
+import {isEscapeKey} from './utils.js';
+import {openModal,closeModal} from './open-close-modal.js';
+import {formReset} from './loading-modal.js';
 import {hashtagsInput, commentsInput, imgUploadForm,imgUploadOverlay,pageBody} from './const.js';
 
 
@@ -24,7 +24,7 @@ const onPhotoKeydown = (evt) => {
 
 const onPhotoEditorResetBtnClick = ()=> closeFormUpload();
 
-const readFile = (file) => {
+const readImg = (img) => {
   const reader = new FileReader();
   reader.onload = (evt) => {
     previewImage.src = evt.target.result;
@@ -32,7 +32,7 @@ const readFile = (file) => {
       miniPreviewImage.style.backgroundImage = `url(${evt.target.result})`;
     });
   };
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(img);
 };
 
 const openFormUpload = () => {
@@ -41,10 +41,10 @@ const openFormUpload = () => {
   ImgUploadCancelBtn.addEventListener('click', onPhotoEditorResetBtnClick);
 };
 
-const handleFileInputChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    readFile(file);
+const onUploadInputChange = (event) => {
+  const uploadedImg = event.target.files[0];
+  if (uploadedImg) {
+    readImg(uploadedImg);
     openFormUpload();
   }
 };
@@ -56,4 +56,4 @@ function closeFormUpload (){
   formReset();
 }
 
-export {previewImage,imgUploadInput,handleFileInputChange,imgUploadOverlay,closeFormUpload };
+export {previewImage,imgUploadInput,onUploadInputChange,imgUploadOverlay,closeFormUpload };

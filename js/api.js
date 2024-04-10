@@ -1,19 +1,6 @@
-const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
-const Route = {
-  GET_DATE: '/data',
-  SEND_DATE: '/'
-};
 
-const Method = {
-  GET:'GET',
-  POST:'POST'
-};
-
-const ErrorText = {
-  [Method.GET] :'Не удалось загрузить данные. Попробуйте еще раз',
-  [Method.POST]:'Не удалось загрузить данные формы'
-};
+import {BASE_URL, Route, Method, ErrorText } from './const';
 
 
 const load = (route, method = Method.GET, body = null) => {

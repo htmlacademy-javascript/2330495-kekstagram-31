@@ -23,15 +23,15 @@ const renderListNode = ({dataItems, createdNote, container}) =>{
 // Cоздает функцию проверки нажатой клавиши
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-function debounce (callback, timeoutDelay = DEBOUNCE_DELAY) {
+const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
 
   let timeoutId;
 
-  return () => {
+  return (...rest) => {
     clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback(...arguments), timeoutDelay);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
 
 export { findTemplate, renderListNode, isEscapeKey,debounce};

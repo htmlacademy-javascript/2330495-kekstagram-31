@@ -36,7 +36,7 @@ const onDocumentKeydown = (evt) => {
 const openBigPhoto = () => openModal(bigPhotoContainer,onDocumentKeydown);
 
 //Функция открытия большого фото
-const renderCurrentPhoto = (evt)=> {
+const onCurrentPhotoClick = (evt)=> {
   const currentPhotoNode = evt.target.closest('.picture');
 
   if(currentPhotoNode){
@@ -56,4 +56,4 @@ function closeBigPhoto () {
 // Обработчик, который закрывает большую фотографию
 bigPhotoCloseElement.addEventListener('click',closeBigPhoto);
 
-export{renderCurrentPhoto, renderBigPhoto, commentsData};
+export{onCurrentPhotoClick, renderBigPhoto, commentsData};

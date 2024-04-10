@@ -1,12 +1,12 @@
-import {sendFormData} from './validation-form';
-import { clearFilter } from './effect-photo-editor.js';
+import {sendFormData} from './validation-uploadedform.js';
+import {clearFilter} from './effect-photo-editor.js';
 import {imgUploadForm} from './const.js';
 import {findTemplate} from './utils.js';
 
 
 const formSubmitButton = document.querySelector('#upload-submit');
-const templateSuccess = findTemplate('#success').cloneNode(true);
-const templateError = findTemplate('#error').cloneNode(true);
+const templateSuccess = findTemplate('#success');
+const templateError = findTemplate('#error');
 
 const formReset = () => {
   imgUploadForm.reset();
