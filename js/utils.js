@@ -1,3 +1,4 @@
+import {DEBOUNCE_DELAY} from './const';
 
 // Находит template в разметке
 const findTemplate = (id) =>{
@@ -22,7 +23,17 @@ const renderListNode = ({dataItems, createdNote, container}) =>{
 // Cоздает функцию проверки нажатой клавиши
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
+const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
 
-export { findTemplate, renderListNode, isEscapeKey};
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+
+export { findTemplate, renderListNode, isEscapeKey,debounce};
 
 

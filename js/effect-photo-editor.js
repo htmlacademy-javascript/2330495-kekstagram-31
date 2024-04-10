@@ -1,4 +1,4 @@
-import {previewImage} from './upload-form';
+import {previewImage} from './upload-photo-form.js';
 import {imgUploadOverlay} from './const.js';
 
 const effectLevelValue = imgUploadOverlay.querySelector('.effect-level__value');
@@ -37,7 +37,6 @@ const updateSliderOptions = ({min, max, start, step, filterName, unit}) =>{
 };
 
 effectLevel.classList.add('hidden');
-
 
 const clearFilter = () => {
   effectLevelValue.value = '';

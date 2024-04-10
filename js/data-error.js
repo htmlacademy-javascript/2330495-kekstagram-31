@@ -1,7 +1,6 @@
 import {findTemplate} from './utils.js';
 import {REMOVE_MESSAGE_TIMEOUT,pageBody} from './const';
 
-// const body = document.body;
 
 const showErrorMessage = (message) => {
   const errorArea = findTemplate('#data-error').cloneNode(true);
