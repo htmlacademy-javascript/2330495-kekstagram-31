@@ -5,57 +5,60 @@ import {closeFormUpload} from './upload-photo-form.js';
 import {appendNotification} from './notification.js';
 
 const pristine = new Pristine(imgUploadForm, {
-  classTo: 'img-upload__field-wrapper', // Элемент, на который будут добавляться классы
-  errorClass: 'img-upload__field-wrapper--error', // Класс, обозначающий невалидное поле
-  // successClass: '', // Не указываем класс
-  errorTextParent: 'img-upload__field-wrapper', // Элемент, куда будет выводиться текст с ошибкой
-  errorTextTag: 'div', // Тег, который будет обрамлять текст ошибки
-  errorTextClass: 'pristine-error' // Класс для элемента с текстом ошибки
+  classTo: 'img-upload__field-wrapper',
+  errorClass: 'img-upload__field-wrapper--error',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextTag: 'div',
+  errorTextClass: 'pristine-error'
 });
 
-const errorMessage = 'Хэштег начинается с символа # и должна состоять из букв и чисел ';
+
+const errorMessage = 'Ошибка здесь';
 const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 const hashtagsValidator = (value) =>{
-  const hashtags = value.trim().split(/\s+/); // Разделяем строку по пробелам и удаляем лишние пробелы в начале и конце
-  const uniqueHashtags = new Set(hashtags); // Преобразуем массив в множество, чтобы убрать дубликаты
-  // Проверяем, что количество хэштегов не превышает 5
+  const hashtags = value.trim().split(/\s+/);
+  const uniqueHashtags = new Set(hashtags);
+
   if (uniqueHashtags.size > 5) {
-    return false; // Возвращаем false, если количество хэштегов больше 5
+    return false;
   }
 
-  // Проверяем, что количество хэштегов после удаления дубликатов равно исходному количеству
   if (hashtags.length !== uniqueHashtags.size) {
-    return false; // Возвращаем false, если были дубликаты
+    return false;
   }
 
-  // Проверяем каждый хэштег по вашему регулярному выражению
   return hashtags.every((tag) => re.test(tag));
 };
 
 const message = 'Длина комментария не должна превышать 140 символов';
 
 const commenstValidator = () =>{
-  const commentsLength = commentsInput.value.trim(); // Получаем значение комментариев и удаляем лишние пробелы
-  if (commentsLength.length < 140) {
-    return message;
-  }
+  const commentsLength = commentsInput.value.trim();
+  return commentsLength.length > 140 ? false : message;
 };
 
 pristine.addValidator(hashtagsInput, hashtagsValidator, errorMessage);
-pristine.addValidator(commentsInput, commenstValidator, message);
+pristine.addValidator(commentsInput, commenstValidator,message);
 
 
 const sendFormData = (formElement) => {
-  const isValide = pristine.validate();
+  const isValid = pristine.validate();
 
-  if(isValide){
+  if (isValid) {
+    // Отправка данных
     disabledButton(SubmitButtonText.SENDING);
-    sendData (new FormData(formElement));
-    enabledButton(SubmitButtonText.IDLE);
-    appendNotification(templateSuccess, () => closeFormUpload(imgUploadForm));
-  } else {
-    appendNotification(templateError);
+    sendData(new FormData(formElement))
+      .then(() => {
+        appendNotification(templateSuccess, () => closeFormUpload(imgUploadForm));
+
+        pristine.reset();
+        closeFormUpload(imgUploadForm);
+      })
+      .catch(() => {
+        enabledButton(SubmitButtonText.IDLE);
+        appendNotification(templateError);
+      });
   }
 };
 
