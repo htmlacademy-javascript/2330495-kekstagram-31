@@ -77,4 +77,3 @@ const changePhotoEffect = (evt) => {
 };
 
 export {changePhotoEffect,clearFilter};
-

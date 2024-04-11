@@ -26,4 +26,3 @@ const appendNotification = (template, trigger = null) =>{
 };
 
 export {appendNotification,templateSuccess, templateError};
-

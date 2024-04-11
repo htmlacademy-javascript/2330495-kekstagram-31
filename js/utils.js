@@ -33,5 +33,3 @@ const delayRenderPhotos = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
 };
 
 export { findTemplate, renderListNode, isEscapeKey,delayRenderPhotos};
-
-

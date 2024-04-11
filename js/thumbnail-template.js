@@ -16,5 +16,3 @@ const createThumbnail = ({url, description, comments, likes, id})=>{
 };
 
 export {createThumbnail};
-
-

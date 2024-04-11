@@ -15,6 +15,3 @@ const getData = load(Route.GET_DATE);
 const sendData = (body) => load (Route.SEND_DATE, Method.POST, body);
 
 export {getData,sendData};
-
-
-
