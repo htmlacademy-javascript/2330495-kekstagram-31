@@ -43,7 +43,7 @@ const openFormUpload = () => {
 
 };
 
-const onUploadInputChange = (event) => {
+const uploadImg = (event) => {
   const uploadedImg = event.target.files[0];
   if (uploadedImg) {
     readImg(uploadedImg);
@@ -68,4 +68,4 @@ function closeFormUpload (){
   formReset();
 }
 
-export {previewImage, imgUploadInput, onUploadInputChange, imgUploadOverlay, closeFormUpload, formReset, onUploadFormSubmit};
+export {previewImage, imgUploadInput, uploadImg, imgUploadOverlay, closeFormUpload, formReset, onUploadFormSubmit};

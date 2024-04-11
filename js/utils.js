@@ -22,7 +22,7 @@ const renderListNode = ({dataItems, createdNote, container}) =>{
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
+const delayRenderPhotos = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
 
   let timeoutId;
 
@@ -32,6 +32,6 @@ const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
   };
 };
 
-export { findTemplate, renderListNode, isEscapeKey,debounce};
+export { findTemplate, renderListNode, isEscapeKey,delayRenderPhotos};
 
 

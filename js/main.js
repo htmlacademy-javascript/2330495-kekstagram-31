@@ -3,11 +3,11 @@ import {createThumbnail} from './thumbnail-template.js';
 import {renderListNode} from './utils.js';
 import {onCurrentPhotoClick} from './render-big-photo.js';
 import {smallScaleButton,bigScaleButton,onSmallBtnClick,onBigBtnClick} from './scale-photo-editor.js';
-import {onEffectChange} from './effect-photo-editor.js';
+import {changePhotoEffect} from './effect-photo-editor.js';
 import {getData} from './api.js';
-import {imgUploadInput,onUploadInputChange, onUploadFormSubmit} from'./upload-photo-form.js';
+import {imgUploadInput, uploadImg, onUploadFormSubmit} from'./upload-photo-form.js';
 import {showErrorMessage} from './data-error.js';
-import {configFilter} from './filter-thumbnails.js';
+import {showFilteredPhotos} from './filter-thumbnails.js';
 import {imgUploadForm} from './const.js';
 import './notification.js';
 import './validation-form.js';
@@ -20,7 +20,7 @@ let picturesData;
 getData.then ((data)=>{
   picturesData = data;
   renderListNode({dataItems:picturesData, createdNote:createThumbnail, container:thumbnailsBox});
-  configFilter(picturesData);
+  showFilteredPhotos(picturesData);
 }).catch ((error) => {
   showErrorMessage(error.message);
 });
@@ -29,9 +29,9 @@ getData.then ((data)=>{
 thumbnailsBox.addEventListener('click', onCurrentPhotoClick);
 
 // Обработчик который загружает фото
-imgUploadInput.addEventListener('change', onUploadInputChange);
+imgUploadInput.addEventListener('change', uploadImg);
 // Обработчики которые редактируют фото
-effectsList.addEventListener ('change',onEffectChange);
+effectsList.addEventListener ('change',changePhotoEffect);
 smallScaleButton.addEventListener('click', onSmallBtnClick);
 bigScaleButton.addEventListener('click', onBigBtnClick);
 

@@ -31,11 +31,6 @@ const FILTER = {
   discussed: 'filter-discussed'
 };
 
-const SORTFUNC = {
-  random: () => 0.5 - Math.random(),
-  discussed: (a,b) => b.comments.length - a.comments.length
-};
-
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const pageBody = document.querySelector('body');
@@ -44,4 +39,4 @@ const hashtagsInput = imgUploadForm.querySelector('.text__hashtags');
 const commentsInput = imgUploadForm.querySelector('.text__description');
 
 
-export{COMMENTS_STEP , SCALE_STEP, REMOVE_MESSAGE_TIMEOUT ,imgUploadForm, imgUploadOverlay, pageBody, bigPhotoContainer, hashtagsInput, commentsInput, FILTER, SORTFUNC, MAX_PICTURE_COUNT, ACTIVE_BUTTON_CLASS,DEBOUNCE_DELAY, BASE_URL, Route, Method, ErrorText, HASHTAGS_MAX, MAX_COMMENT_LENGTH, MAX_HASHTAG_LENGTH };
+export{COMMENTS_STEP , SCALE_STEP, REMOVE_MESSAGE_TIMEOUT ,imgUploadForm, imgUploadOverlay, pageBody, bigPhotoContainer, hashtagsInput, commentsInput, FILTER, MAX_PICTURE_COUNT, ACTIVE_BUTTON_CLASS,DEBOUNCE_DELAY, BASE_URL, Route, Method, ErrorText, HASHTAGS_MAX, MAX_COMMENT_LENGTH, MAX_HASHTAG_LENGTH };
