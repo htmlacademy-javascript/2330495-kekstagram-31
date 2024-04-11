@@ -5,6 +5,11 @@ import {closeFormUpload} from './upload-photo-form.js';
 import {appendNotification} from './notification.js';
 import {sendData} from './api.js';
 
+
+const formSubmitButton = document.querySelector('#upload-submit');
+const message = `Длина комментария не должна превышать ${MAX_COMMENT_LENGTH} символов`;
+let errorMessage = '';
+
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
@@ -12,11 +17,6 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextTag: 'div',
   errorTextClass: 'pristine-error'
 });
-
-const formSubmitButton = document.querySelector('#upload-submit');
-
-let errorMessage = '';
-const getErrorMessage = () => errorMessage;
 
 const validateHashtagStart = (hashtags) =>
   hashtags.some((hashtag) => hashtag[0] !== '#');
@@ -61,12 +61,12 @@ const validateHashtags = (inputText) => {
   });
 };
 
-const message = `Длина комментария не должна превышать ${MAX_COMMENT_LENGTH} символов`;
-
 const validateCommentsFormat = (inputText) =>{
   const commentsLength = inputText.toLowerCase().trim();
   return commentsLength.length > 140 ? false : message;
 };
+
+const getErrorMessage = () => errorMessage;
 
 pristine.addValidator(hashtagsInput, validateHashtags, getErrorMessage);
 pristine.addValidator(commentsInput, validateCommentsFormat, message);
