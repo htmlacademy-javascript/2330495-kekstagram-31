@@ -10,7 +10,7 @@ import {showErrorMessage} from './data-error.js';
 import {configFilter} from './filter-thumbnails.js';
 import {imgUploadForm} from './const.js';
 import './notification.js';
-import './validation-uploadedform.js';
+import './validation-form.js';
 
 const thumbnailsBox = document.querySelector('.pictures');
 const effectsList = document.querySelector('.effects__list');
