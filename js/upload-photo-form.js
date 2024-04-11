@@ -1,14 +1,26 @@
 
 import {isEscapeKey} from './utils.js';
 import {openModal,closeModal} from './open-close-modal.js';
-import {formReset} from './loading-modal.js';
 import {hashtagsInput, commentsInput, imgUploadForm,imgUploadOverlay,pageBody} from './const.js';
-
+// import {sendFormData} from './newForm.js';
+import {sendFormData} from './validation-uploadedform.js';
+import {clearFilter} from './effect-photo-editor.js';
 
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const miniPreviewImages = imgUploadForm.querySelectorAll('.effects__preview');
 const ImgUploadCancelBtn = imgUploadOverlay.querySelector('.img-upload__cancel');
 const previewImage = imgUploadOverlay.querySelector('.img-upload__preview img');
+
+const readImg = (img) => {
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    previewImage.src = evt.target.result;
+    miniPreviewImages.forEach ((miniPreviewImage) =>{
+      miniPreviewImage.style.backgroundImage = `url(${evt.target.result})`;
+    });
+  };
+  reader.readAsDataURL(img);
+};
 
 
 const onPhotoKeydown = (evt) => {
@@ -24,21 +36,11 @@ const onPhotoKeydown = (evt) => {
 
 const onPhotoEditorResetBtnClick = ()=> closeFormUpload();
 
-const readImg = (img) => {
-  const reader = new FileReader();
-  reader.onload = (evt) => {
-    previewImage.src = evt.target.result;
-    miniPreviewImages.forEach ((miniPreviewImage) =>{
-      miniPreviewImage.style.backgroundImage = `url(${evt.target.result})`;
-    });
-  };
-  reader.readAsDataURL(img);
-};
-
 const openFormUpload = () => {
   pageBody.classList.add('modal-open');
   openModal(imgUploadOverlay, onPhotoKeydown);
   ImgUploadCancelBtn.addEventListener('click', onPhotoEditorResetBtnClick);
+
 };
 
 const onUploadInputChange = (event) => {
@@ -49,6 +51,16 @@ const onUploadInputChange = (event) => {
   }
 };
 
+const formReset = () => {
+  imgUploadForm.reset();
+  clearFilter();
+};
+
+const onUploadFormSubmit = (evt) =>{
+  evt.preventDefault();
+  sendFormData(evt.target);
+};
+
 function closeFormUpload (){
   closeModal(imgUploadOverlay,onPhotoKeydown);
   pageBody.classList.remove('modal-open');
@@ -56,4 +68,4 @@ function closeFormUpload (){
   formReset();
 }
 
-export {previewImage,imgUploadInput,onUploadInputChange,imgUploadOverlay,closeFormUpload };
+export {previewImage, imgUploadInput, onUploadInputChange, imgUploadOverlay, closeFormUpload, formReset, onUploadFormSubmit};

@@ -53,7 +53,6 @@ const onEffectChange = (evt) => {
     effectLevel.classList.remove('hidden');
   }
 
-
   switch (effect){
     case 'none':
       previewImage.style.filter = 'none';

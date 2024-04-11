@@ -1,7 +1,6 @@
 import {findTemplate} from './utils.js';
 import {REMOVE_MESSAGE_TIMEOUT,pageBody} from './const';
 
-
 const showErrorMessage = (message) => {
   const errorArea = findTemplate('#data-error').cloneNode(true);
 
@@ -13,7 +12,7 @@ const showErrorMessage = (message) => {
 
   const errorLoadDataArea = pageBody.querySelector('.data-error');
 
-  setTimeout(()=> {
+  setTimeout(() => {
     errorLoadDataArea.remove();
   }, REMOVE_MESSAGE_TIMEOUT);
 };
