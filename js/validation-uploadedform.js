@@ -5,7 +5,6 @@ import {closeFormUpload} from './upload-photo-form.js';
 import {appendNotification} from './notification.js';
 import {sendData} from './api.js';
 
-
 const formSubmitButton = document.querySelector('#upload-submit');
 const message = `Длина комментария не должна превышать ${MAX_COMMENT_LENGTH} символов`;
 let errorMessage = '';
