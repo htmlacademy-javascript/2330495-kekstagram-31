@@ -6,8 +6,6 @@ const imgUploadContainer = imgUploadOverlay.querySelector('.img-upload__preview-
 const scaleControl = imgUploadContainer.querySelector('.scale__control--value');
 const smallScaleButton = imgUploadContainer.querySelector('.scale__control--smaller');
 const bigScaleButton = imgUploadContainer.querySelector('.scale__control--bigger');
-
-
 let scale = 1;
 
 const onSmallBtnClick = () =>{

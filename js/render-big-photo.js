@@ -4,13 +4,11 @@ import {renderNextComments, commentsLoader, cleanComments} from './render-commen
 import {picturesData} from './main.js';
 import {bigPhotoContainer} from './const';
 
-
 const bigPhotoCloseElement = bigPhotoContainer.querySelector('.big-picture__cancel');
 const bigPhotoImage = bigPhotoContainer.querySelector('.big-picture__img img');
 const likesCount = bigPhotoContainer.querySelector('.likes-count');
 const bigPhotoDiscription = bigPhotoContainer.querySelector('.social__caption');
 let commentsData = [];
-
 
 const renderBigPhoto = (photoNode)=>{
   const currentPhoto = picturesData.find((photo) => photo.id === Number(photoNode.dataset.photoId));
@@ -25,7 +23,6 @@ const renderBigPhoto = (photoNode)=>{
   commentsLoader.addEventListener('click', renderNextComments);
 };
 
-
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -35,7 +32,6 @@ const onDocumentKeydown = (evt) => {
 
 const openBigPhoto = () => openModal(bigPhotoContainer,onDocumentKeydown);
 
-//Функция открытия большого фото
 const onCurrentPhotoClick = (evt)=> {
   const currentPhotoNode = evt.target.closest('.picture');
 
@@ -47,13 +43,11 @@ const onCurrentPhotoClick = (evt)=> {
   }
 };
 
-//Функция закрытия большого фото
 function closeBigPhoto () {
   closeModal(bigPhotoContainer,onDocumentKeydown);
   commentsLoader.removeEventListener('click', renderNextComments);
 }
 
-// Обработчик, который закрывает большую фотографию
 bigPhotoCloseElement.addEventListener('click',closeBigPhoto);
 
 export{onCurrentPhotoClick, renderBigPhoto, commentsData};

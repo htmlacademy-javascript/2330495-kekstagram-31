@@ -46,5 +46,3 @@ const cleanComments = () =>{
 };
 
 export {renderNextComments, commentsContainer, commentsLoader, cleanComments};
-
-

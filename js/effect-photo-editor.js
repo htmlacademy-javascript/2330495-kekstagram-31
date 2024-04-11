@@ -44,7 +44,7 @@ const clearFilter = () => {
   previewImage.style.filter = '';
 };
 
-const onEffectChange = (evt) => {
+const changePhotoEffect = (evt) => {
   const effect = evt.target.value;
 
   if (effect === 'none'){
@@ -52,7 +52,6 @@ const onEffectChange = (evt) => {
   } else {
     effectLevel.classList.remove('hidden');
   }
-
 
   switch (effect){
     case 'none':
@@ -77,5 +76,4 @@ const onEffectChange = (evt) => {
   }
 };
 
-export {onEffectChange,clearFilter};
-
+export {changePhotoEffect,clearFilter};

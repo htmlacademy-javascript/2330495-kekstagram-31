@@ -1,10 +1,15 @@
 import {pageBody} from './const';
 import {isEscapeKey} from './utils';
+import {findTemplate} from './utils.js';
+
+const templateSuccess = findTemplate('#success');
+const templateError = findTemplate('#error');
 
 const closeNotification = (evt) => {
   evt.stopPropagation();
   const existElement = document.querySelector ('.success') || document.querySelector ('.error');
-  const closeButton = document.querySelector ('button');
+  const closeButton = existElement.querySelector('button[type="button"]');
+
   if (evt.target === existElement || evt.target === closeButton || isEscapeKey(evt)){
     existElement.remove();
     pageBody.removeEventListener ('click', closeNotification);
@@ -20,5 +25,4 @@ const appendNotification = (template, trigger = null) =>{
   pageBody.addEventListener ('keydown', closeNotification);
 };
 
-export {appendNotification};
-
+export {appendNotification,templateSuccess, templateError};
