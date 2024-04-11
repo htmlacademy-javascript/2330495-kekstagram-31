@@ -5,8 +5,8 @@ import {createThumbnail} from './thumbnail-template.js';
 import {thumbnailsBox} from './main.js';
 
 let currentFilter = FILTER.default;
-let pictures = [];
 const filterElement = document.querySelector ('.img-filters');
+let pictures = [];
 
 const debounceRender = debounce(renderListNode);
 
@@ -15,6 +15,7 @@ const applyFilter = () => {
   if (currentFilter === FILTER.default){
     filteredPictures = pictures;
   }
+
   if (currentFilter === FILTER.random){
     filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0, MAX_PICTURE_COUNT);
 
@@ -28,7 +29,6 @@ const applyFilter = () => {
   });
 
   debounceRender({dataItems:filteredPictures, createdNote:createThumbnail, container:thumbnailsBox});
-
 };
 
 const onFilterChange = (evt) =>{
