@@ -21,14 +21,11 @@ const getErrorMessage = () => errorMessage;
 const validateHashtagStart = (hashtags) =>
   hashtags.some((hashtag) => hashtag[0] !== '#');
 
-
 const validateHashtagFormat = (hashtags) =>
   hashtags.some((hashtag) => !/^#[a-zа-яё0-9]{1,19}$/i.test(hashtag));
 
-
 const validateHashtagUniqueness = (hashtags) =>
   hashtags.some((hashtag, num, array) => array.includes(hashtag, num + 1));
-
 
 const rules = [
   {
@@ -73,7 +70,6 @@ const validateCommentsFormat = (inputText) =>{
 
 pristine.addValidator(hashtagsInput, validateHashtags, getErrorMessage);
 pristine.addValidator(commentsInput, validateCommentsFormat, message);
-
 
 const sendFormData = (formElement) => {
   const isValid = pristine.validate();
