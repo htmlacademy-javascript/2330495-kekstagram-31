@@ -2,7 +2,6 @@
 import {isEscapeKey} from './utils.js';
 import {openModal,closeModal} from './open-close-modal.js';
 import {hashtagsInput, commentsInput, imgUploadForm,imgUploadOverlay,pageBody} from './const.js';
-// import {sendFormData} from './newForm.js';
 import {sendFormData} from './validation-form.js';
 import {clearFilter} from './effect-photo-editor.js';
 
