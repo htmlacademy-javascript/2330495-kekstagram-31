@@ -9,12 +9,12 @@ const commentsLoader = bigPhotoContainer.querySelector('.comments-loader');
 let currentCount;
 
 
-const createComments = ({avatar, message, user})=>{
+const createComments = ({avatar, message, name})=>{
   const socialComment = findTemplate('#comment').cloneNode(true);
   const avatarImage = socialComment.querySelector('.social__picture');
 
   avatarImage.src = avatar;
-  avatarImage.alt = user;
+  avatarImage.alt = name;
 
   socialComment.querySelector('.social__text').textContent = message;
 
