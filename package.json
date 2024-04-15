@@ -19,6 +19,7 @@
   "scripts": {
     "start": "vite --port 3000 --open",
     "lint": "eslint js/"
+
   },
   "engines": {
     "node": "18",

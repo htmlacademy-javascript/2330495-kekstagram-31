@@ -1,12 +1,12 @@
 
-const openModal = (container,keydownClick)=>{
+const openModal = (container, clickOnElement)=>{
   container.classList.remove('hidden');
-  document.addEventListener('keydown', keydownClick);
+  document.addEventListener('keydown', clickOnElement);
 };
 
-const closeModal = (container,keydownClick)=>{
+const closeModal = (container, clickOnElement)=>{
   container.classList.add('hidden');
-  document.removeEventListener('keydown', keydownClick);
+  document.removeEventListener('keydown', clickOnElement);
 };
 
 export {openModal,closeModal};

@@ -1,10 +1,9 @@
 
-import {FILTER,MAX_PICTURE_COUNT, ACTIVE_BUTTON_CLASS} from './const.js';
+import {MAX_PICTURES_COUNT, ACTIVE_BUTTON_CLASS, Filter, thumbnailsBox} from './const.js';
 import {delayRenderPhotos, renderListNode} from './utils.js';
 import {createThumbnail} from './thumbnail-template.js';
-import {thumbnailsBox} from './main.js';
 
-let currentFilter = FILTER.default;
+let currentFilter = Filter.default;
 const filterElement = document.querySelector ('.img-filters');
 let pictures = [];
 
@@ -12,23 +11,16 @@ const debounceRender = delayRenderPhotos(renderListNode);
 
 const applyFilter = () => {
   let filteredPictures = [];
-  if (currentFilter === FILTER.default){
+  if (currentFilter === Filter.default){
     filteredPictures = pictures;
   }
-
-  if (currentFilter === FILTER.random){
-    filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0, MAX_PICTURE_COUNT);
-
+  if (currentFilter === Filter.random){
+    filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0, MAX_PICTURES_COUNT);
   }
-  if (currentFilter === FILTER.discussed){
+  if (currentFilter === Filter.discussed) {
     filteredPictures = pictures.toSorted((a,b) => b.comments.length - a.comments.length);
-
   }
-  thumbnailsBox.querySelectorAll('.picture').forEach ((item) =>{
-    item.remove();
-  });
-
-  debounceRender({dataItems:filteredPictures, createdNote:createThumbnail, container:thumbnailsBox});
+  debounceRender({dataItems:filteredPictures, createdNote:createThumbnail, container:thumbnailsBox, className:'.picture'});
 };
 
 const changeFilter = (evt) =>{

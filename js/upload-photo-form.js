@@ -1,8 +1,8 @@
 
 import {isEscapeKey} from './utils.js';
-import {openModal,closeModal} from './open-close-modal.js';
-import {hashtagsInput, commentsInput, imgUploadForm,imgUploadOverlay,pageBody} from './const.js';
-import {sendFormData} from './validation-form.js';
+import {openModal, closeModal} from './open-close-modal.js';
+import {hashtagsInput, commentsInput, imgUploadForm, imgUploadOverlay, pageBody} from './const.js';
+import {sendFormData, pristine} from './validation-form.js';
 import {clearFilter} from './effect-photo-editor.js';
 
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
@@ -12,10 +12,10 @@ const previewImage = imgUploadOverlay.querySelector('.img-upload__preview img');
 
 const readImg = (img) => {
   const reader = new FileReader();
-  reader.onload = (evt) => {
-    previewImage.src = evt.target.result;
+  reader.onload = () => {
+    previewImage.src = URL.createObjectURL(img);
     miniPreviewImages.forEach ((miniPreviewImage) =>{
-      miniPreviewImage.style.backgroundImage = `url(${evt.target.result})`;
+      miniPreviewImage.style.backgroundImage = `url(${previewImage.src})`;
     });
   };
   reader.readAsDataURL(img);
@@ -39,10 +39,9 @@ const openFormUpload = () => {
   pageBody.classList.add('modal-open');
   openModal(imgUploadOverlay, onPhotoKeydown);
   ImgUploadCancelBtn.addEventListener('click', onPhotoEditorResetBtnClick);
-
 };
 
-const uploadImg = (event) => {
+const uploadImgFile = (event) => {
   const uploadedImg = event.target.files[0];
   if (uploadedImg) {
     readImg(uploadedImg);
@@ -50,12 +49,12 @@ const uploadImg = (event) => {
   }
 };
 
-const formReset = () => {
+const resetForm = () => {
   imgUploadForm.reset();
   clearFilter();
 };
 
-const onUploadFormSubmit = (evt) =>{
+const uploadPhoto = (evt) =>{
   evt.preventDefault();
   sendFormData(evt.target);
 };
@@ -64,7 +63,8 @@ function closeFormUpload (){
   closeModal(imgUploadOverlay,onPhotoKeydown);
   pageBody.classList.remove('modal-open');
   ImgUploadCancelBtn.removeEventListener('click',onPhotoEditorResetBtnClick);
-  formReset();
+  resetForm();
+  pristine.reset();
 }
 
-export {previewImage, imgUploadInput, uploadImg, imgUploadOverlay, closeFormUpload, formReset, onUploadFormSubmit};
+export {previewImage, imgUploadInput, uploadPhoto, imgUploadOverlay, closeFormUpload, uploadImgFile};

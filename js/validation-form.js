@@ -1,12 +1,11 @@
 
-import {imgUploadForm, hashtagsInput, commentsInput, HASHTAGS_MAX, MAX_COMMENT_LENGTH, MAX_HASHTAG_LENGTH } from './const.js';
-import {templateSuccess, templateError } from './notification.js';
+import {imgUploadForm, hashtagsInput, commentsInput, MAX_HASHTAGS, MAX_COMMENTS_LENGTH, MAX_HASHTAGS_LENGTH} from './const.js';
+import {templateSuccess, templateError, appendNotification} from './notification.js';
 import {closeFormUpload} from './upload-photo-form.js';
-import {appendNotification} from './notification.js';
 import {sendData} from './api.js';
 
 const formSubmitButton = document.querySelector('#upload-submit');
-const message = `Длина комментария не должна превышать ${MAX_COMMENT_LENGTH} символов`;
+const message = `Длина комментария не должна превышать ${MAX_COMMENTS_LENGTH} символов`;
 let errorMessage = '';
 
 const pristine = new Pristine(imgUploadForm, {
@@ -33,15 +32,15 @@ const rules = [
   },
   {
     check: validateHashtagFormat,
-    error: `Хэштег должен состоять из букв и чисел и не может быть длинее ${MAX_HASHTAG_LENGTH} символов`,
+    error: `Хэштег должен состоять из букв и чисел и не может быть длинее ${MAX_HASHTAGS_LENGTH} символов`,
   },
   {
     check: validateHashtagUniqueness,
     error: 'Один и тот же хэштег не может быть использован дважды',
   },
   {
-    check: (hashtags) => hashtags.length > HASHTAGS_MAX,
-    error: `Нельзя указать больше ${HASHTAGS_MAX} хэштегов`,
+    check: (hashtags) => hashtags.length > MAX_HASHTAGS,
+    error: `Нельзя указать больше ${MAX_HASHTAGS} хэштегов`,
   },
 ];
 
@@ -72,12 +71,10 @@ pristine.addValidator(commentsInput, validateCommentsFormat, message);
 
 const sendFormData = (formElement) => {
   const isValid = pristine.validate();
-
   if (isValid) {
-
+    formSubmitButton.disabled = true;
     sendData(new FormData(formElement))
       .then(() => {
-        formSubmitButton.disabled = true;
         appendNotification(templateSuccess, () => closeFormUpload(imgUploadForm));
         pristine.reset();
       })
@@ -90,4 +87,4 @@ const sendFormData = (formElement) => {
   }
 };
 
-export {sendFormData};
+export {sendFormData, pristine};

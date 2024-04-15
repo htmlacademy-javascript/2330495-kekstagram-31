@@ -1,12 +1,12 @@
 
-const SCALE_STEP = 0.25;
-const DEBOUNCE_DELAY = 500;
-const COMMENTS_STEP = 5;
 const REMOVE_MESSAGE_TIMEOUT = 5000;
-const HASHTAGS_MAX = 5;
-const MAX_COMMENT_LENGTH = 140;
-const MAX_HASHTAG_LENGTH = 20;
-const MAX_PICTURE_COUNT = 10;
+const DEBOUNCE_DELAY = 500;
+const SCALE_STEP = 0.25;
+const MAX_COMMENTS = 5;
+const MAX_HASHTAGS = 5;
+const MAX_COMMENTS_LENGTH = 140;
+const MAX_HASHTAGS_LENGTH = 20;
+const MAX_PICTURES_COUNT = 10;
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
@@ -25,7 +25,7 @@ const ErrorText = {
   [Method.POST]:'Не удалось загрузить данные формы'
 };
 
-const FILTER = {
+const Filter = {
   default: 'filter-default',
   random: 'filter-random',
   discussed: 'filter-discussed'
@@ -37,6 +37,30 @@ const pageBody = document.querySelector('body');
 const bigPhotoContainer = document.querySelector('.big-picture');
 const hashtagsInput = imgUploadForm.querySelector('.text__hashtags');
 const commentsInput = imgUploadForm.querySelector('.text__description');
+const thumbnailsBox = document.querySelector('.pictures');
+const effectsList = document.querySelector('.effects__list');
 
 
-export{COMMENTS_STEP, SCALE_STEP, REMOVE_MESSAGE_TIMEOUT, imgUploadForm, imgUploadOverlay, pageBody, bigPhotoContainer, hashtagsInput, commentsInput, FILTER, MAX_PICTURE_COUNT, ACTIVE_BUTTON_CLASS,DEBOUNCE_DELAY, BASE_URL, Route, Method, ErrorText, HASHTAGS_MAX, MAX_COMMENT_LENGTH, MAX_HASHTAG_LENGTH };
+export {MAX_COMMENTS,
+  SCALE_STEP,
+  REMOVE_MESSAGE_TIMEOUT,
+  MAX_PICTURES_COUNT,
+  ACTIVE_BUTTON_CLASS,
+  DEBOUNCE_DELAY,
+  BASE_URL,
+  MAX_HASHTAGS,
+  MAX_COMMENTS_LENGTH,
+  MAX_HASHTAGS_LENGTH,
+  Filter,
+  Route,
+  Method,
+  ErrorText,
+  imgUploadForm,
+  imgUploadOverlay,
+  pageBody,
+  bigPhotoContainer,
+  hashtagsInput,
+  commentsInput,
+  thumbnailsBox,
+  effectsList
+};
