@@ -2,7 +2,7 @@ import {isEscapeKey} from './utils.js';
 import {openModal,closeModal} from './open-close-modal.js';
 import {renderNextComments, commentsLoader, cleanComments} from './render-comments.js';
 import {picturesData} from './main.js';
-import {bigPhotoContainer} from './const';
+import {bigPhotoContainer, pageBody} from './const';
 
 const bigPhotoCloseElement = bigPhotoContainer.querySelector('.big-picture__cancel');
 const bigPhotoImage = bigPhotoContainer.querySelector('.big-picture__img img');
@@ -40,12 +40,14 @@ const onCurrentPhotoClick = (evt)=> {
     cleanComments();
     renderBigPhoto(currentPhotoNode);
     openBigPhoto();
+    pageBody.classList.add('modal-open');
   }
 };
 
 function closeBigPhoto () {
   closeModal(bigPhotoContainer,onDocumentKeydown);
   commentsLoader.removeEventListener('click', renderNextComments);
+  pageBody.classList.remove('modal-open');
 }
 
 bigPhotoCloseElement.addEventListener('click',closeBigPhoto);

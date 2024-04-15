@@ -1,6 +1,6 @@
 import {findTemplate, renderListNode} from './utils.js';
 import {commentsData} from './render-big-photo.js';
-import {COMMENTS_STEP,bigPhotoContainer} from './const.js';
+import {MAX_COMMENTS,bigPhotoContainer} from './const.js';
 
 const commentsShowCount = bigPhotoContainer.querySelector('.social__comment-shown-count');
 const commentsTotalCount = bigPhotoContainer.querySelector('.social__comment-total-count');
@@ -9,12 +9,12 @@ const commentsLoader = bigPhotoContainer.querySelector('.comments-loader');
 let currentCount;
 
 
-const createComments = ({avatar, message, user})=>{
+const createComments = ({avatar, message, name})=>{
   const socialComment = findTemplate('#comment').cloneNode(true);
   const avatarImage = socialComment.querySelector('.social__picture');
 
   avatarImage.src = avatar;
-  avatarImage.alt = user;
+  avatarImage.alt = name;
 
   socialComment.querySelector('.social__text').textContent = message;
 
@@ -22,7 +22,7 @@ const createComments = ({avatar, message, user})=>{
 };
 
 const renderNextComments = () => {
-  const step = currentCount + COMMENTS_STEP;
+  const step = currentCount + MAX_COMMENTS;
 
   const renderedComments = commentsData.slice(currentCount, step);
   const renderedCommentsLength = renderedComments.length + currentCount;
@@ -36,7 +36,7 @@ const renderNextComments = () => {
     renderListNode ({dataItems:renderedComments,createdNote:createComments,container:commentsContainer});
     commentsShowCount.textContent = step ;
   }
-  currentCount += COMMENTS_STEP;
+  currentCount += MAX_COMMENTS;
   commentsTotalCount.textContent = commentsData.length;
 };
 

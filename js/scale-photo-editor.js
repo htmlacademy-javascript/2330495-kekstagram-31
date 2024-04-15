@@ -1,6 +1,5 @@
-import {SCALE_STEP} from './const';
+import {SCALE_STEP, imgUploadOverlay} from './const';
 import {previewImage} from './upload-photo-form.js';
-import {imgUploadOverlay} from './const.js';
 
 const imgUploadContainer = imgUploadOverlay.querySelector('.img-upload__preview-container');
 const scaleControl = imgUploadContainer.querySelector('.scale__control--value');
@@ -24,4 +23,4 @@ const onBigBtnClick = () =>{
   }
 };
 
-export {smallScaleButton,bigScaleButton,onSmallBtnClick,onBigBtnClick};
+export {smallScaleButton, bigScaleButton, onSmallBtnClick, onBigBtnClick};
